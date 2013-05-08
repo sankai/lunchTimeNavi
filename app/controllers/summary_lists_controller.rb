@@ -21,6 +21,7 @@ class SummaryListsController < ApplicationController
     # 検索範囲日時だけは検索条件とする
     @comments = @comments.where('? <= lunch_comments.updated_at and lunch_comments.updated_at <= ?', search_commentRegistDateFrom, search_commentRegistDateTo)
     # Pagination
+    @comments = @comments.order('lunches.restaurant_id DESC, lunch_id DESC, id DESC')
     @comments = @comments.paginate(:page => params[:page], :per_page => 10)
     @comments = @comments.all()
 
@@ -33,67 +34,66 @@ class SummaryListsController < ApplicationController
   # --------------------------------------------------------
   def search
 
-    # 検索条件をパラメータから取り出す
-    search_restaurantName  = params[:search][:restaurantName]
-    search_address         = params[:search][:address]
-    search_genre_id        = params[:search][:genre_id]
-    search_rating_id       = params[:search][:rating_id]
-    search_reservation     = params[:search][:reservation]
-
-    search_commentRegistDateFrom = params[:search][:commentRegistDateFrom]
-    search_commentRegistDateTo   = params[:search][:commentRegistDateTo]
- 
+    if params[:page].nil?
+      # 初回検索のとき（ページ繰りしていないとき）
+      # 検索条件をオブジェクトにして、セッションにセット
+      @search = Search.new(params[:search])
+      session[:search] = @search
+    else
+      @search = session[:search]
+    end
+    
     # 検索条件パネルのための仕込み
-    @search = Search.new(search_restaurantName, search_address, search_genre_id, search_rating_id, search_reservation)
-    @genres = Genre.all()
+    @genres  = Genre.all()
     @ratings = Rating.all() 
-    @commentRegistDateFrom = search_commentRegistDateFrom
-    @commentRegistDateTo   = search_commentRegistDateTo
+    @commentRegistDateFrom = @search.commentRegistDateFrom
+    @commentRegistDateTo   = @search.commentRegistDateTo
     
     # 日時に関する入力値の型変換
-    if !(search_commentRegistDateFrom.blank?)
-      search_commentRegistDateFrom = "1000-01-01 00:00:00.000000"
+    if (@search.commentRegistDateFrom.blank?)
+      @search.commentRegistDateFrom = "1000-01-01 00:00:00.000000"
     else
-      search_commentRegistDateFrom = search_commentRegistDateFrom.gsub(/\//, "-") + " 00:00:00.000000"
+      @search.commentRegistDateFrom = @search.commentRegistDateFrom.gsub(/\//, "-") + " 00:00:00.000000"
     end
-    if !(search_commentRegistDateTo.blank?)
-      search_commentRegistDateTo = "9999-12-31 23:59:59.000000"
+    if (@search.commentRegistDateTo.blank?)
+      @search.commentRegistDateTo = "9999-12-31 23:59:59.000000"
     else
-      search_commentRegistDateTo = search_commentRegistDateTo.gsub(/\//, "-") + " 23:59:59.000000"
+      @search.commentRegistDateTo = @search.commentRegistDateTo.gsub(/\//, "-") + " 23:59:59.000000"
     end
     
     # ジョイン指示
     @comments = LunchComment.joins(:lunch => :restaurant)
     
     # 検索範囲日時
-    @comments = @comments.where('? <= lunch_comments.updated_at and lunch_comments.updated_at <= ?', search_commentRegistDateFrom, search_commentRegistDateTo)
+    @comments = @comments.where('? <= lunch_comments.updated_at and lunch_comments.updated_at <= ?', @search.commentRegistDateFrom, @search.commentRegistDateTo)
     
     # 予約可否（チェックがついている場合、予約可を検索、チェックがついていない場合は、検索条件に含めない）
-    if !(search_reservation.blank?)
+    if !(@search.reservation.blank?)
     	@comments = @comments.where('restaurants.reservation = ?', 't')
     end
     
     # レストラン名（あいまい検索）
-    if !(search_restaurantName.blank?)
-    	@comments = @comments.where('restaurants.name like ?', "%" + search_restaurantName + "%")
+    if !(@search.restaurantName.blank?)
+    	@comments = @comments.where('restaurants.name like ?', "%" + @search.restaurantName + "%")
     end
 
     # レストラン住所（あいまい検索）
-    if !(search_address.blank?)
-    	@comments = @comments.where('restaurants.address like ?', "%" + search_address + "%")
+    if !(@search.address.blank?)
+    	@comments = @comments.where('restaurants.address like ?', "%" + @search.address + "%")
     end
     
     # ジャンル
-    if !(search_genre_id.blank?)
-      @comments = @comments.where('lunches.genre_id = ?', search_genre_id)
+    if !(@search.genre_id.blank?)
+      @comments = @comments.where('lunches.genre_id = ?', @search.genre_id)
     end
 
     # 評価
-    if !(search_rating_id.blank?)
-      @comments = @comments.where('rating_id >= ?', search_rating_id)
+    if !(@search.rating_id.blank?)
+      @comments = @comments.where('rating_id >= ?', @search.rating_id)
     end
 
     # Pagination
+    @comments = @comments.order('lunches.restaurant_id DESC, lunch_id DESC, id DESC')
     @comments = @comments.paginate(:page => params[:page], :per_page => 10)
 
     # SQL発行
