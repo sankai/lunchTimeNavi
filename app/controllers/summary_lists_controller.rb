@@ -51,14 +51,10 @@ class SummaryListsController < ApplicationController
     
     # 日時に関する入力値の型変換
     if (@search.commentRegistDateFrom.blank?)
-      @search.commentRegistDateFrom = "1000-01-01 00:00:00.000000"
-    else
-      @search.commentRegistDateFrom = @search.commentRegistDateFrom.gsub(/\//, "-") + " 00:00:00.000000"
+      @search.commentRegistDateFrom = "2000-01-01 00:00:00.000000"
     end
     if (@search.commentRegistDateTo.blank?)
-      @search.commentRegistDateTo = "9999-12-31 23:59:59.000000"
-    else
-      @search.commentRegistDateTo = @search.commentRegistDateTo.gsub(/\//, "-") + " 23:59:59.000000"
+      @search.commentRegistDateTo   = "2020-12-31 23:59:59.000000"
     end
     
     # ジョイン指示
