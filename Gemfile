@@ -61,3 +61,7 @@ gem 'will_paginate', '~>3.0'
 # gem 'debugger'
 
 gem 'carrierwave'  
+
+# for pagination
+gem 'will_paginate', '~> 3.0'
+

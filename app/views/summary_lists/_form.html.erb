@@ -4,7 +4,7 @@
   <% old_restaurantid = -1 %>
   <% old_lunchid = -1 %>
   
-  <% if !(@ary == nil || @ary.length == 0) %>
+  <% if !(@comments.blank?) %>
     <thead class="restrantTable">
       <tr bgcolor="#FFFF99">
         <th align="center" colspan="2" style="font-weight:bold">レストラン</th>
@@ -15,74 +15,79 @@
   <% end %>
 
   <tbody>
-  <% @ary.each do |restaurant, lunch, lunch_comment| %>
+ <!-- restaurant zone -->
+  <% @comments.each do |lunch_comment| %>
     <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
       </td >
       <td class="list_actions" width="50">
-      <% if restaurant.id != old_restaurantid %>
-        <%= link_to image_tag("Info.ico", :border=>0, :alt=>"詳細", :size=>"16x16"), restaurant %>
-        <%= link_to image_tag("Edit.ico", :border=>0, :alt=>"編集", :size=>"16x16"), edit_restaurant_path(restaurant) %>
+      <% if lunch_comment.lunch.restaurant_id != old_restaurantid %>
+        <%= link_to image_tag("Info.ico", :border=>0, :alt=>"詳細", :size=>"16x16"), lunch_comment.lunch.restaurant %>
+        <%= link_to image_tag("Edit.ico", :border=>0, :alt=>"編集", :size=>"16x16"), edit_restaurant_path(lunch_comment.lunch.restaurant) %>
       <% end %>
       </td>
       <td class="info_restaurant">
-      <% if restaurant.id != old_restaurantid %>
+      <% if lunch_comment.lunch.restaurant_id != old_restaurantid %>
         <dl>
-          <dt><%= truncate(restaurant.name, {:length => 40}) %></dt>
+          <dt><%= truncate(lunch_comment.lunch.restaurant.name, {:length => 40}) %></dt>
           <dd>
-              <% if restaurant.congestion %>
-                ( 混雑度：<%= restaurant.congestion.name %> )
+              <% if lunch_comment.lunch.restaurant.congestion %>
+                ( 混雑度：<%= lunch_comment.lunch.restaurant.congestion.name %> )
               <% else %>
                 ( 混雑度：未登録 )
               <% end %>
           </dd>
-          <% unless restaurant.postcode.nil? %>
-            <dd>〒<%= truncate(restaurant.postcode, {:length => 8}) %></dd>
+          <% unless lunch_comment.lunch.restaurant.postcode.nil? %>
+            <dd>〒<%= truncate(lunch_comment.lunch.restaurant.postcode, {:length => 8}) %></dd>
           <% end %>
-          <dd><%= truncate(restaurant.address, {:length => 40}) %></dd>
-          <dd><%= restaurant.startTime.strftime('%H:%M') %> ～ <%= restaurant.endTime.strftime('%H:%M') %></dd>
+          <dd><%= truncate(lunch_comment.lunch.restaurant.address, {:length => 40}) %></dd>
+          <dd><%= lunch_comment.lunch.restaurant.startTime.strftime('%H:%M') %> ～ <%= lunch_comment.lunch.restaurant.endTime.strftime('%H:%M') %></dd>
         </dl>
       <% end %>
       <td class="list_actions" width="50">
-        <% unless lunch.nil? %>
-          <% if lunch.id != old_lunchid %>
-            <%= link_to image_tag("Info.ico", :border=>0, :alt=>"詳細", :size=>"16x16"), lunch %>
-            <%= link_to image_tag("Edit.ico", :border=>0, :alt=>"編集", :size=>"16x16"), edit_lunch_path(lunch) %>
-            <%= link_to image_tag("New_Lunch.ico", :border=>0, :alt=>"新規", :size=>"16x16"), {:controller => "lunches", :action => "new", :id => restaurant.id} %>
+        <% unless lunch_comment.lunch.nil? %>
+          <% if lunch_comment.lunch.id != old_lunchid %>
+            <%= link_to image_tag("Info.ico", :border=>0, :alt=>"詳細", :size=>"16x16"), lunch_comment.lunch %>
+            <%= link_to image_tag("Edit.ico", :border=>0, :alt=>"編集", :size=>"16x16"), edit_lunch_path(lunch_comment.lunch) %>
+            <%= link_to image_tag("New_Lunch.ico", :border=>0, :alt=>"新規", :size=>"16x16"), {:controller => "lunches", :action => "new", :id => lunch_comment.lunch.restaurant_id} %>
           <% end %>
         <% else %>
-           <%= link_to image_tag("New_Lunch.ico", :border=>0, :alt=>"新規", :size=>"16x16"), {:controller => "lunches", :action => "new", :id => restaurant.id} %><br />
+           <%= link_to image_tag("New_Lunch.ico", :border=>0, :alt=>"新規", :size=>"16x16"), {:controller => "lunches", :action => "new", :id => lunch_comment.lunch.restaurant_id} %><br />
       <% end %>
       </td>
+
+ <!-- lunch zone -->      
       <td class="info_lunch">
         <dl>
-          <% if lunch.nil? %>
+          <% if lunch_comment.lunch.nil? %>
             <dt>（未登録）</dt>
           <% else %>
-            <% if lunch.id != old_lunchid %>
+            <% if lunch_comment.lunch_id != old_lunchid %>
 			  <div class="layout_left">
-              <dt><%= truncate(lunch.name, {:length => 60}) %></dt>
-              <dd><%= lunch.genre.name %></dd>
-              <dd><%= number_to_currency(lunch.price, :unit => '円', :precision =>0, :format => '%n%u') %></dd>
-              <% if lunch.withdrink %>
+              <dt><%= truncate(lunch_comment.lunch.name, {:length => 60}) %></dt>
+              <dd><%= lunch_comment.lunch.genre.name %></dd>
+              <dd><%= number_to_currency(lunch_comment.lunch.price, :unit => '円', :precision =>0, :format => '%n%u') %></dd>
+              <% if lunch_comment.lunch.withdrink %>
     	          <dd>(ドリンクサービス有り)</dd>
               <% end %>
               </div>
-			  <% unless lunch.image_url.to_s.blank? %> 
+			  <% unless lunch_comment.lunch.image_url.to_s.blank? %> 
 				<div class="layout_right">
-				  <%= image_tag lunch.image_url.to_s  , :height=>"80" %>
+				  <%= image_tag lunch_comment.lunch.image_url.to_s  , :size=>"80x80" %>
 				</div>
 			  <% end %>
 			<% end %>
           <% end %>
         <dl>
       </td>
+      
+ <!-- lunch_comment zone -->      
       <td class="list_actions" width="50">
-        <% unless lunch.nil? %>
+        <% unless lunch_comment.lunch.nil? %>
           <% unless lunch_comment.nil? %>
             <%= link_to image_tag("Info.ico", :border=>0, :alt=>"詳細", :size=>"16x16"), lunch_comment %>
             <%= link_to image_tag("Edit.ico", :border=>0, :alt=>"編集", :size=>"16x16"), edit_lunch_comment_path(lunch_comment) %>
           <% end %>
-            <%= link_to image_tag("New_Comment.ico", :border=>0, :alt=>"新規", :size=>"16x16"), {:controller => "lunch_comments", :action => "new", :id => lunch.id} %>
+            <%= link_to image_tag("New_Comment.ico", :border=>0, :alt=>"新規", :size=>"16x16"), {:controller => "lunch_comments", :action => "new", :id => lunch_comment.lunch_id} %>
         <% end %>
       </td>
       <td class="info_lunch_comment">
@@ -98,13 +103,15 @@
         <dl>
       </td>
     </tr>
-   <% unless restaurant.nil? %>
-     <% old_restaurantid = restaurant.id %>
+   <% unless lunch_comment.lunch.restaurant.nil? %>
+     <% old_restaurantid = lunch_comment.lunch.restaurant_id %>
    <% end %>
-   <% unless lunch.nil? %>
-     <% old_lunchid = lunch.id %>
+   <% unless lunch_comment.lunch.nil? %>
+     <% old_lunchid = lunch_comment.lunch_id %>
    <% end %>
   <% end %>
   </tbody>
 </table>
 </div>
+
+<%= will_paginate @comments, :previous_label=>'≪前', :next_label=>'次≫' %> 
