@@ -96,7 +96,7 @@
         <% if lunch_comment.nil? %>
           <dt>（未評価）</dt>
         <% else %>
-          <dt>評価  <%= lunch_comment.rating.name %></dt>
+          <dt><%= lunch_comment.rating_name %></dt>
           <dd><%= truncate(lunch_comment.name, {:length => 50}) %></dd>
           <dd><%= truncate(lunch_comment.text, {:length => 60}) %></dd> 
           <dd>(<%= display_time(lunch_comment.updated_at) %>)</dd>

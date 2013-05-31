@@ -66,6 +66,7 @@ class LunchCommentsController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @lunch_comment.errors, status: :unprocessable_entity }
       end
+      #@lunch_comment.lunch.removeDummy
     end
   end
 
