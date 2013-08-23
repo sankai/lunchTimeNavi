@@ -1,3 +1,11 @@
+<script src="http://maps.google.com/maps/api/js?sensor=true&language=ja" ></script>
+<style>
+  #map {
+  	width: 800;
+  	height: 200px;
+  }
+</style>
+	
 <h1>レストラン情報</h1>
 <div id="menu">
   <ul>
@@ -84,7 +92,7 @@
     <%= display_bool(@restaurant.sundayUp) %>
 
 	<%= label :restaurant, :mondayUp %>:
-    <%= display_bool(@restaurant.mondayUp) %>
+	    <%= display_bool(@restaurant.mondayUp) %>
 
     <%= label :restaurant, :tuesdayUp %>:
     <%= display_bool(@restaurant.tuesdayUp) %>
@@ -110,7 +118,7 @@
 
     <td> 
 	<%= @restaurant.startTime.strftime('%H:%M') %>
-    　〜　
+    ～
     <%= @restaurant.endTime.strftime('%H:%M') %>
   </tr>
 
@@ -124,4 +132,35 @@
   <% end %>
 	</td>
 
+  <tr>
+    <td class="tdh">
+      地図
+	</td>
+	<td>
+      <div id="map"></div>
+	</td>
+	
 </TABLE>
+<%= hidden_field_tag 'restaurantAddr', @restaurant.address %>
+<script>
+ 	var geocoder = new google.maps.Geocoder();
+ 	geocoder.geocode({
+ 		 'address': document.getElementById("restaurantAddr").value
+ 	}, function(result, status) {
+ 		if (status == google.maps.GeocoderStatus.OK) {
+			var latlng  = result[0].geometry.location;
+			var options = {
+				zoom: 15,
+				center: latlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("map"), options);
+			var marker = new google.maps.Marker({
+				position: map.getCenter(),
+				map: map
+				});
+		} else {
+			alert(document.getElementById("restaurant_addr").value);
+		}
+	});
+</script>
