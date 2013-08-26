@@ -15,7 +15,7 @@ gem 'heroku'
 
 #gem 'sqlite3'
 group :production, :staging do
-  gem "pg"
+  gem "mysql"
 end
 
 group :development, :test do
