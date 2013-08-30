@@ -8,14 +8,14 @@ gem 'rails', '3.2.8'
 #----------------- for Heroku start ----------------------#
 #gem 'sqlite3', group: [:development, :test]
 #gem 'pg', group: :production
-# git://github.com/sankai/lunchTimeNavi.git
+# 
 
 gem 'heroku'
 
 group :production, :staging do
-  # gem "pg"       # heroku 
-  gem "mysql"    # 1go1nen
-  gem "activerecord-mysql2-adapter" # 1go1nen
+  gem "pg"       # heroku 
+  #gem "mysql"    # 1go1nen
+  #gem "activerecord-mysql2-adapter" # 1go1nen
 end
 
 group :development, :test do
@@ -66,11 +66,11 @@ gem 'carrierwave'
 gem 'will_paginate', '~> 3.0'  
 
 # for cloudinary
-#gem 'cloudinary'	# heroku only
+gem 'cloudinary'	# heroku only
 
 
 # for clean logs
-#gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
+gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
 
 
 
