@@ -11,7 +11,7 @@ gem 'rails', '3.2.8'
 
 
 
-gem 'heroku'
+#gem 'heroku'
 
 #gem 'sqlite3'
 group :production, :staging do
@@ -64,4 +64,11 @@ gem 'carrierwave'
 
 # for pagination
 gem 'will_paginate', '~> 3.0'
+
+# for cloudinary
+gem 'cloudinary'
+
+# for clean logs
+gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git'
+
 

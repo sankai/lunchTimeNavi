@@ -1,0 +1,9 @@
+development:
+  cloud_name: "ogis-ita-community-osaka"
+  api_key: "798992993836289"
+  api_secret: "K1yGkvNcodvT42s7BuMc9f6GDpM"
+
+production:
+  cloud_name: "ogis-ita-community-osaka"
+  api_key: "798992993836289"
+  api_secret: "K1yGkvNcodvT42s7BuMc9f6GDpM"
