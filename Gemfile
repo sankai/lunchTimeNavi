@@ -5,17 +5,18 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#----------------- for Heroku -------------------------#
+#----------------- for Heroku start ----------------------#
 #gem 'sqlite3', group: [:development, :test]
 #gem 'pg', group: :production
 
 
 
-#gem 'heroku'
+gem 'heroku'
 
-#gem 'sqlite3'
 group :production, :staging do
-  gem "mysql"
+  # gem "pg"       # heroku 
+  gem "mysql"    # 1go1nen
+  gem "activerecord-mysql2-adapter" # 1go1nen
 end
 
 group :development, :test do
@@ -26,7 +27,7 @@ end
 #  gem 'thin'
 #end
 
-#----------------- for Heroku -------------------------#
+#----------------- for Heroku end -------------------------#
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -63,12 +64,14 @@ gem 'will_paginate', '~>3.0'
 gem 'carrierwave'  
 
 # for pagination
-gem 'will_paginate', '~> 3.0'
+gem 'will_paginate', '~> 3.0'  
 
 # for cloudinary
-# gem 'cloudinary'
+gem 'cloudinary'	# heroku only
+
 
 # for clean logs
-# gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git'
+gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
+
 
 
