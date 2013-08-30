@@ -66,9 +66,9 @@ gem 'carrierwave'
 gem 'will_paginate', '~> 3.0'
 
 # for cloudinary
-gem 'cloudinary'
+# gem 'cloudinary'
 
 # for clean logs
-gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git'
+# gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git'
 
 
