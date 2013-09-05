@@ -15,7 +15,7 @@ gem 'rails', '3.2.8'
 group :production, :staging do
   #gem "pg"       # heroku 
   gem "mysql2", '= 0.3.11'    # 1go1nen
-  gem "activerecord-mysql2-adapter" # 1go1nen
+  # gem "activerecord-mysql2-adapter" # 1go1nen
 end
 
 group :development, :test do

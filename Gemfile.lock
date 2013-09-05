@@ -116,7 +116,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  activerecord-mysql2-adapter
   carrierwave
   coffee-rails (~> 3.2.1)
   jquery-rails
