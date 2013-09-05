@@ -10,11 +10,10 @@ gem 'rails', '3.2.8'
 #gem 'pg', group: :production
 # 
 
-gem 'heroku'
-
+#gem 'heroku'
 group :production, :staging do
-  gem "pg"       # heroku 
-  #gem "mysql"    # 1go1nen
+  #gem "pg"       # heroku 
+  gem "mysql"    # 1go1nen
   #gem "activerecord-mysql2-adapter" # 1go1nen
 end
 
@@ -70,7 +69,7 @@ gem 'cloudinary'	# heroku only
 
 
 # for clean logs
-gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
+#gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
 
 
 
