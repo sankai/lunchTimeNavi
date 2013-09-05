@@ -66,7 +66,7 @@ gem 'carrierwave'
 gem 'will_paginate', '~> 3.0'  
 
 # for cloudinary
-#gem 'cloudinary'	# heroku only
+gem 'cloudinary'	# heroku only
 
 
 # for clean logs
