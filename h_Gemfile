@@ -5,7 +5,7 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#----------------- for Heroku start ----------------------#
+#----------------- for Heroku start ---------------------#
 #gem 'sqlite3', group: [:development, :test]
 #gem 'pg', group: :production
 # 
@@ -26,7 +26,7 @@ end
 #  gem 'thin'
 #end
 
-#----------------- for Heroku end -------------------------#
+#----------------- for Heroku end ------------------------#
 
 # Gems used only for assets and not required
 # in production environments by default.
