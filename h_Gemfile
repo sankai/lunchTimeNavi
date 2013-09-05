@@ -5,30 +5,35 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#----------------- for Heroku -------------------------#
+#----------------- for Heroku start ---------------------#
+#gem 'sqlite3', group: [:development, :test]
+#gem 'pg', group: :production
+# 
 
-#gem 'heroku'
+gem 'heroku'
 
-gem 'sqlite3'
-#group :production, :staging do
-#  gem "pg"
-#end
-#
-#group :development, :test do
-#  gem "sqlite3-ruby", :require => "sqlite3"
-#end
-#
+group :production, :staging do
+  gem "pg"       # heroku 
+  #gem "mysql2"    # 1go1nen
+  #gem "activerecord-mysql2-adapter" # 1go1nen
+end
+
+group :development, :test do
+  gem "sqlite3-ruby", :require => "sqlite3"
+end
+
 #group :production do
 #  gem 'thin'
 #end
 
-#----------------- for Heroku -------------------------#
+#----------------- for Heroku end ------------------------#
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'jquery-ui-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -54,4 +59,18 @@ gem 'will_paginate', '~>3.0'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'carrierwave'  
+
+# for pagination
+gem 'will_paginate', '~> 3.0'  
+
+# for cloudinary
+gem 'cloudinary'	# heroku only
+
+
+# for clean logs
+gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
+
+
 
