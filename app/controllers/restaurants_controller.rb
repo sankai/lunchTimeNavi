@@ -32,8 +32,8 @@ class RestaurantsController < ApplicationController
 
     #セッション情報から現在のログインユーザーをセットする。
     #（情報がある場合のみセット）
-    unless session[:currentUser].nil?
-      @name = session[:currentUser].name
+    unless current_user.nil?
+      @name = current_user.email
     end
 
     respond_to do |format|

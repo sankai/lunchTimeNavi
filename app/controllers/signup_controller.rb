@@ -1,3 +1,6 @@
+#
+# このクラスはDeviseの導入により、使用していません。
+#
 # coding:utf-8
 
 class SignupController < ApplicationController
