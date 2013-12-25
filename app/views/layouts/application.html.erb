@@ -7,6 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body class='<%= controller.controller_name %>'>
+  <div align="right"><tbl><tr><td><%= link_to "プロファイル", edit_user_registration_path %></td>   <td></td><td><%= link_to "サインアウト", destroy_user_session_path, :method => :delete %></td></tr></tbl></div>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 <!--
 <%= image_tag("logo.jpg") %>
 -->

@@ -44,3 +44,11 @@ ja:
       rating:
         name: '評価'
         value: '値'
+      user:
+        name: ニックネーム
+        password: パスワード
+        email: Ｅメール
+        remember_me: ログイン状態を維持する。
+        password_confirmation: パスワード（確認）
+        current_password: 現在のパスワード
+

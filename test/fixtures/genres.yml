@@ -1,32 +1,54 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
+genre1:
   id: 1
   name: 和食
-two:
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
+
+genre2:
   id: 2
   name: 中華
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
 
-three:
+genre3:
   id: 3
   name: フレンチ
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
 
-four:
+genre4:
   id: 4
   name: イタリアン
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
 
-five:
+genre5:
   id: 5
-  name: インド
+  name: エスニック
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
 
-six:
+genre6:
   id: 6
-  name: ファーストフード
+  name: ファストフード
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
 
-seven:
+genre7:
   id: 7
   name: カフェ
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
 
-eight:
+genre8:
   id: 8
   name: ファミレス
+  created_at: 2012-11-06 23:51:46
+  updated_at: 2012-11-06 23:51:46
+
+genre9:
+  id: 9
+  name: （指定なし）
+  created_at: 2012-11-23 10:46:41.328125
+  updated_at: 2012-11-23 10:46:41.328125
+

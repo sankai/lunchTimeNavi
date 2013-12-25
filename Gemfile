@@ -70,9 +70,9 @@ gem 'will_paginate', '~> 3.0'
 # for cloudinary
 gem 'cloudinary'	# heroku only
 
-
 # for clean logs
-#gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
+# gem 'rails-clean-logs', :git => 'git://github.com/lucas-clemente/rails-clean-logs.git' # heroku only
 
-
+# Devise
+gem 'devise'
 

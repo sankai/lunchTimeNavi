@@ -1,9 +1,21 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  name: MyString
+congestion1:
+  id: 1
+  name: 低
   value: 1
+  created_at: 2012-12-05 13:54:23.859375
+  updated_at: 2012-12-05 13:54:23.859375
 
-two:
-  name: MyString
-  value: 1
+congestion2:
+  id: 2
+  name: 中
+  value: 2
+  created_at: 2012-12-05 13:54:44.187500
+  updated_at: 2012-12-05 13:54:44.187500
+
+congestion3:
+  id: 3
+  name: 高
+  value: 3
+  created_at: 2012-12-05 13:54:59.406250
+  updated_at: 2012-12-05 13:54:59.406250
+
